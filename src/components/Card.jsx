@@ -1,7 +1,16 @@
-export function Card({ number, clickHandler }) {
+import "../styles/Card.css";
+import { useSelector } from "react-redux";
+
+export function Card({ number, pick }) {
+  const score = useSelector((state) => state.score.value);
+
+  const clickHandler = (e) => {
+    pick();
+  };
+
   return (
     <div
-      onClick={clickHandler}
+      onClick={() => clickHandler()}
       className="overflow-hidden hover:cursor-pointer border border-gray-200 rounded-xl w-full h-48 dark:border-gray-700 dark:bg-gray-800"
     >
       <div

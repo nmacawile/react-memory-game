@@ -1,26 +1,29 @@
 import "./App.css";
 import Header from "./components/Header.jsx";
 import Cards from "./components/Cards.jsx";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { increment, reset } from "./features/score/scoreSlice";
+import { push, clear } from "./features/picks/picksSlice";
 
 export function App() {
-  const [score, setScore] = useState(0);
-  const [picks, setPicks] = useState([]);
+  const dispatch = useDispatch();
+  const score = useSelector((state) => state.score.value);
+  const picks = useSelector((state) => state.picks.value);
 
   const testPick = (n) => {
     const alreadyPicked = picks.some((p) => p === n);
     if (alreadyPicked) {
-      setScore(0);
-      setPicks([]);
+      dispatch(reset());
+      dispatch(clear());
     } else {
-      setScore(score + 1);
-      setPicks([...picks, n]);
+      dispatch(increment());
+      dispatch(push(n));
     }
   };
 
   return (
     <div className="bg-neutral-800">
-      <Header score={score}></Header>
+      <Header />
       <main className="max-w-6xl w-full m-auto">
         <Cards testPick={testPick}></Cards>
       </main>
