@@ -7,7 +7,6 @@ import { push, clear } from "./features/picks/picksSlice";
 
 export function App() {
   const dispatch = useDispatch();
-  const score = useSelector((state) => state.score.value);
   const picks = useSelector((state) => state.picks.value);
 
   const testPick = (n) => {

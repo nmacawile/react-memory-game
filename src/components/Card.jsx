@@ -1,24 +1,59 @@
+import { Flash } from "./Flash.jsx";
+import { useState, useEffect } from "react";
 import "../styles/Card.css";
-import { useSelector } from "react-redux";
 
-export function Card({ number, pick }) {
-  const score = useSelector((state) => state.score.value);
+export function Card({ number, pick, locked }) {
+  const [flash, setFlash] = useState(0);
+  const [appear, setAppear] = useState(false);
 
   const clickHandler = (e) => {
+    if (locked) return;
     pick();
+    setFlash(1);
+    setTimeout(() => {
+      setFlash(0);
+    }, 610);
+  };
+
+  const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${number}.png`;
+
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => {
+      setAppear(true);
+    };
+    img.src = imageSrc;
+
+    return () => {
+      img.onload = null;
+    };
+  }, []);
+
+  const silhouette = () => {
+    if (locked) {
+      if (flash === 0) return " brightness-0 contrast-100";
+      else return "";
+    }
+    return "";
   };
 
   return (
     <div
       onClick={() => clickHandler()}
-      className="overflow-hidden hover:cursor-pointer border border-gray-200 rounded-xl w-full h-48 dark:border-gray-700 dark:bg-gray-800"
+      className="image-card relative hover:cursor-pointer border border-gray-200 rounded-xl w-full h-48 dark:border-gray-700 dark:bg-gray-800"
     >
       <div
-        className="transition-transform w-full h-full bg-center bg-contain bg-no-repeat hover:scale-110"
+        className={
+          "image transition ease-in-out duration-500 w-full h-full bg-center bg-contain bg-no-repeat" +
+          silhouette() +
+          (appear ? " opacity-100" : " opacity-0 blur-md")
+        }
         style={{
-          backgroundImage: `url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${number}.png')`,
+          backgroundImage: `url(${imageSrc})`,
         }}
       ></div>
+
+      <Flash flash={flash} />
     </div>
   );
 }

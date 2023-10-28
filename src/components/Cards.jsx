@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 export function Cards({ testPick }) {
   const [numbers, setNumbers] = useState([]);
+  const [locked, setLocked] = useState(false);
 
   const generateRandomNumbers = () => {
     let _numbers = [];
@@ -13,8 +14,13 @@ export function Cards({ testPick }) {
   };
 
   const pick = (n) => {
-    generateRandomNumbers();
-    return testPick(n);
+    if (locked) return;
+    setLocked(true);
+    testPick(n);
+    setTimeout(() => {
+      generateRandomNumbers();
+      setLocked(false);
+    }, 700);
   };
 
   useEffect(() => {
@@ -22,9 +28,14 @@ export function Cards({ testPick }) {
   }, []);
 
   return (
-    <div className="p-2 lg:p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 lg:gap-4">
+    <div className="overflow-hidden p-2 lg:p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 lg:gap-4">
       {numbers.map((n, i) => (
-        <Card pick={() => pick(n)} key={`card-${i}`} number={n} />
+        <Card
+          pick={() => pick(n)}
+          locked={locked}
+          key={`card-${i}-${n}`}
+          number={n}
+        />
       ))}
     </div>
   );
