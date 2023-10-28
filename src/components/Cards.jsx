@@ -28,7 +28,7 @@ export function Cards({ testPick }) {
   }, []);
 
   return (
-    <div className="overflow-hidden p-2 lg:p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 lg:gap-4">
+    <div className="overflow-hidden p-2 md:p-4 lg:p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6">
       {numbers.map((n, i) => (
         <Card
           pick={() => pick(n)}
