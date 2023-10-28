@@ -1,9 +1,15 @@
 import Card from "./Card.jsx";
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { increment, reset } from "../features/score/scoreSlice";
+import { push, clear } from "../features/picks/picksSlice";
 
-export function Cards({ testPick }) {
+export function Cards() {
   const [numbers, setNumbers] = useState([]);
   const [locked, setLocked] = useState(false);
+
+  const dispatch = useDispatch();
+  const picks = useSelector((state) => state.picks.value);
 
   const generateRandomNumbers = () => {
     let _numbers = [];
@@ -11,6 +17,17 @@ export function Cards({ testPick }) {
       _numbers.push(Math.ceil(Math.random() * 151));
     }
     setNumbers(_numbers);
+  };
+
+  const testPick = (n) => {
+    const alreadyPicked = picks.some((p) => p === n);
+    if (alreadyPicked) {
+      dispatch(reset());
+      dispatch(clear());
+    } else {
+      dispatch(increment());
+      dispatch(push(n));
+    }
   };
 
   const pick = (n) => {
