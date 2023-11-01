@@ -3,17 +3,27 @@ import { createSlice } from "@reduxjs/toolkit";
 export const scoreSlice = createSlice({
   name: "counter",
   initialState: {
-    value: 0,
+    value: { current: 0, high: 0 },
   },
   reducers: {
     increment: (state) => {
-      state.value += 1;
+      const { current, high } = state.value;
+      const incremented = current + 1;
+      state.value = {
+        current: incremented,
+        high: incremented > high ? incremented : high,
+      };
     },
     reset: (state) => {
-      state.value = 0;
+      state.value = { current: 0, high: state.value.high };
     },
     incrementBy: (state, action) => {
-      state.value += action.payload;
+      const { current, high } = state.value;
+      const incremented = current + action.payload;
+      state.value = {
+        current: incremented,
+        high: incremented > high ? incremented : high,
+      };
     },
   },
 });

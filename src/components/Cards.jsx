@@ -15,6 +15,7 @@ export function Cards() {
 
   const dispatch = useDispatch();
   const score = useSelector((state) => state.score.value);
+  const currentScore = score.current;
   const picks = useSelector((state) => state.picks.value);
   const { picked, unpicked } = picks;
 
@@ -64,7 +65,7 @@ export function Cards() {
   };
 
   useEffect(() => {
-    if (score === TOTAL_NUMBER_OF_CARDS) {
+    if (currentScore === TOTAL_NUMBER_OF_CARDS) {
       setLocked(true);
       setTimeout(() => {
         dispatch(show());
