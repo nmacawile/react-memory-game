@@ -1,3 +1,4 @@
 .image-card:hover .image {
-  transform: scale(125%);;
+  transform: scale(125%);
+  z-index: 11;
 }

@@ -44,7 +44,7 @@ export function Card({ number, pick, locked }) {
     >
       <div
         className={
-          "image transition ease-in-out duration-500 w-full h-full bg-center bg-contain bg-no-repeat" +
+          "relative z-10 image transition ease-in-out duration-500 w-full h-full bg-center bg-contain bg-no-repeat" +
           silhouette() +
           (appear ? " opacity-100" : " opacity-0 blur-sm")
         }
