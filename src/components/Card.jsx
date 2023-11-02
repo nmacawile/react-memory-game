@@ -7,7 +7,7 @@ export function Card({ number, pick, locked }) {
   const [appear, setAppear] = useState(false);
 
   const clickHandler = (e) => {
-    if (locked) return;
+    if (locked || !appear) return;
     pick();
     setFlash(1);
     setTimeout(() => {
