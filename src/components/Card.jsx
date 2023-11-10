@@ -40,7 +40,7 @@ export function Card({ number, pick, locked }) {
   return (
     <div
       onClick={() => clickHandler()}
-      className="image-card relative hover:cursor-pointer border border-gray-200 rounded-xl w-full h-48 dark:border-gray-700 dark:bg-gray-800"
+      className="image-card relative hover:cursor-pointer border border-gray-300 rounded-xl w-full h-48 dark:border-gray-700 bg-gray-200 dark:bg-gray-800"
     >
       <div
         className={

@@ -5,10 +5,10 @@ import Modal from "./components/Modal.jsx";
 
 export function App() {
   return (
-    <div className="bg-neutral-800">
+    <div className="dark:bg-neutral-800 h-full">
       <Header />
       <Modal />
-      <main className="max-w-6xl w-full m-auto">
+      <main className="max-w-6xl w-full m-auto dark:bg-neutral-800">
         <Cards />
       </main>
     </div>

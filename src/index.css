@@ -6,11 +6,6 @@ html, body, #root {
   height: 100%;
 }
 
-#root {
-  --tw-bg-opacity: 1;
-  background-color: rgb(38 38 38 / var(--tw-bg-opacity));
-}
-
 *, *::before, *::after {
   box-sizing: border-box;
 }

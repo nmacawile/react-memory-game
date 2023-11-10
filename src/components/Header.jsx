@@ -11,10 +11,10 @@ export function Header() {
         Memory Game
       </span>
       <div className="flex flex-col items-end">
-        <div className="text-white text-xl">
+        <div className="dark:text-white text-xl">
           <span>Score: {currentScore}</span>
         </div>
-        <div className="text-white text-xl">
+        <div className="dark:text-white text-xl">
           <span>High: {highScore}</span>
         </div>
       </div>
