@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { reset } from "../features/score/scoreSlice";
-import { clear } from "../features/picks/picksSlice";
+import { clear } from "../features/game/gameSlice";
 import { hide } from "../features/modal/modalSlice";
 
 export function Modal() {
@@ -10,7 +9,6 @@ export function Modal() {
 
   const close = () => {
     dispatch(hide());
-    dispatch(reset());
     dispatch(clear());
   };
 
