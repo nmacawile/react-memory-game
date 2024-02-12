@@ -3,20 +3,20 @@ import { useState, useEffect } from "react";
 import "../styles/Card.css";
 
 export function Card({ number, pick, locked }) {
-  const [flash, setFlash] = useState(0);
+  const [flash, setFlash] = useState(false);
   const [appear, setAppear] = useState(false);
 
   const clickHandler = (e) => {
     if (locked || !appear) return;
     pick();
-    setFlash(1);
-    setTimeout(() => {
-      setFlash(0);
-    }, 610);
+    setFlash(true);
+    // removes the invisible Flash component from the DOM
+    setTimeout(() => setFlash(false), 600);
   };
 
   const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${number}.png`;
 
+  // fade in image after loading
   useEffect(() => {
     const img = new Image();
     img.onload = () => {
@@ -29,12 +29,17 @@ export function Card({ number, pick, locked }) {
     };
   }, []);
 
+  // silhoutte image when 'locked' is true
+  // unless it is the image of the picked card
   const silhouette = () => {
-    if (locked) {
-      if (flash === 0) return " brightness-0 contrast-100";
-      else return "";
-    }
-    return "";
+    if (locked && !flash) return " brightness-0 contrast-100";
+    else return "";
+  };
+
+  // 'appear' is set to false initially then
+  // changes into true when the image is loaded
+  const fadeIn = () => {
+    return appear ? " opacity-100" : " opacity-0 blur-sm";
   };
 
   return (
@@ -46,14 +51,13 @@ export function Card({ number, pick, locked }) {
         className={
           "relative z-10 image transition ease-in-out duration-500 w-full h-full bg-center bg-contain bg-no-repeat" +
           silhouette() +
-          (appear ? " opacity-100" : " opacity-0 blur-sm")
+          fadeIn()
         }
         style={{
           backgroundImage: `url(${imageSrc})`,
         }}
       ></div>
-
-      <Flash flash={flash} />
+      {flash && <Flash />}
     </div>
   );
 }
