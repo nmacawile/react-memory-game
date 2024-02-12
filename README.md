@@ -1,8 +1,16 @@
-# React + Vite
+# React Memory Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is designed to implement React's side effect concepts.
 
-Currently, two official plugins are available:
+## Tools and Libraries
+- [Vite](https://vitejs.dev/)
+- [React](https://react.dev/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [React Redux](https://react-redux.js.org/)
+- [gh-pages](https://github.com/gitname/react-gh-pages)
+- [PokéAPI](https://pokeapi.co/)
+- [uuid](https://www.npmjs.com/package/uuid)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Images
+- [Pokémon Images sourced from PokéAPI](https://github.com/PokeAPI/sprites)
+- [Ball Game Poke Sport Sports SVG](https://www.svgrepo.com/svg/381093/ball-game-poke-sport-sports)
