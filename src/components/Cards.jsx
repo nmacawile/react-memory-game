@@ -6,7 +6,7 @@ import { show } from "../features/modal/modalSlice";
 import generateCards from "../helpers/cardGenerator.js";
 
 export function Cards() {
-  const [numbers, setNumbers] = useState([]);
+  const [cards, setCards] = useState([]);
   const [locked, setLocked] = useState(true);
 
   const dispatch = useDispatch();
@@ -26,23 +26,23 @@ export function Cards() {
       setLocked(true);
       setTimeout(() => {
         dispatch(show());
-      }, 700);
+      }, 300);
     } else {
       setTimeout(() => {
-        setNumbers(generateCards(unpicked));
+        setCards(generateCards(unpicked));
         setLocked(false);
-      }, 700);
+      }, 600);
     }
   }, [score]);
 
   return (
     <div className="overflow-hidden p-2 md:p-4 lg:p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6">
-      {numbers.map((n, i) => (
+      {cards.map(({ key, number }) => (
         <Card
-          pick={() => pick(n)}
+          pick={() => pick(number)}
           locked={locked}
-          key={`card-${i}-${n}`}
-          number={n}
+          key={key}
+          number={number}
         />
       ))}
     </div>

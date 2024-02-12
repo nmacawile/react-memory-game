@@ -2,11 +2,12 @@ import {
   TOTAL_NUMBER_OF_CARDS,
   NUMBER_OF_CARDS_DRAWN,
 } from "../config/AppConfig";
+import { v4 as uuidv4 } from "uuid";
 
 const generateCards = (unpicked) => {
   let _numbers = generateRandomNumbers();
   _numbers = insertNonLosingNumber(_numbers, unpicked);
-  return _numbers;
+  return _numbers.map((number) => ({ key: uuidv4(), number }));
 };
 
 const generateRandomNumbers = () => {
